@@ -1,0 +1,277 @@
+
+
+
+<!doctype html>
+<!--[if IE 9]>
+<html class="lt-ie10" lang="en"> <![endif]-->
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Design Posting Process</title>
+
+
+    <meta name="description"
+          content="Update what your Blog is about in this section"/>
+
+    <meta name="author" content="Your name goes here"/>
+    <meta name="copyright" content="Maybe consider a Creative Commons license"/>
+
+    <link rel="stylesheet" href="../../css/foundation.css"/>
+    <link rel="stylesheet" href="../../css/font-awesome.css"/>
+    <link rel="stylesheet" href="../../css/coderay.css"/>
+    <link rel="stylesheet" href="../../css/asciidoctor.css"/>
+
+    <style>
+        html {
+            overflow-y: scroll;
+        }
+    </style>
+</head>
+<body>
+
+
+<!-- Nav Bar -->
+
+<div class="top-bar">
+    <div class="top-bar-left">
+        <ul class="menu">
+            <li class="menu-text">almighty</li>
+        </ul>
+    </div>
+    <div class="top-bar-right">
+       <ul class="menu">
+           <li><a href="../../ux/ux-overview.html">ux designs</a></li>
+           <li><a href="../../meetings/agendas.html">meetings</a></li>
+           <li><a href="../../">home</a></li>
+       </ul>
+    </div>
+</div>
+<!-- End Nav -->
+
+<!-- Main Page Content and Sidebar -->
+
+<div class="row">
+    <!-- Main Blog Content -->
+    <div class="large-9 columns" role="content">
+
+        <h1>Design Posting Process</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="img/invision-link.png" alt="invision link">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>When posting your work, use the URL from InVision’s Share feature and not the URL from the browser.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>NOTE:</strong> This URL will not change when you update the content of the prototype. It <strong>will</strong> change when you change the attributes on the prototype, such as allowing commenting.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="post_design_artifacts_and_links">Post design artifacts* and links</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>*(artifacts include materials related to the design, discovery, workflows, wireframes, prototypes, visuals…)</em></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Post <strong>InVision links</strong> in the UXD JIRA stories</p>
+</li>
+<li>
+<p>Post JIRA link in GIT story in almighty-ux</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Once your story is pulled into an AppDev sprint, create an issue that includes a link to the JIRA story on <a href="https://github.com/almighty/almighty-ux/issues">https://github.com/almighty/almighty-ux/issues</a>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Post artifact links in GIT devdocs</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Based on the type of artifact you want to link to, determine which ASCII doc** should be updated.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Wireframes: <a href="almighty-devdoc/ux/design/wireframes/wireframes.adoc">almighty-devdoc/ux/design/wireframes/wireframes.adoc</a></p>
+</li>
+<li>
+<p>Workflows: <a href="almighty-devdoc/ux/design/workflows/workflows.adoc">almighty-devdoc/ux/design/workflows/workflows.adoc</a></p>
+</li>
+<li>
+<p>Visuals: <a href="almighty-devdoc/ux/design/visuals/visuals.adoc">almighty-devdoc/ux/design/visuals/visuals.adoc</a></p>
+</li>
+<li>
+<p>Discovery: <a href="almighty-devdoc/ux/discovery/discovery-overview.adoc">almighty-devdoc/ux/discovery/discovery-overview.adoc</a></p>
+</li>
+<li>
+<p>Strategy: <a href="almighty-devdoc/ux/strategy/strategy-overview.adoc">almighty-devdoc/ux/strategy/strategy-overview.adoc</a></p>
+</li>
+<li>
+<p>Usability: <a href="almighty-devdoc/ux/usability-testing/usability-overview.adoc">almighty-devdoc/ux/usability-testing/usability-overview.adoc</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Update the document to include a link to the artifact and a brief description of what it contains.</p>
+<div class="literalblock">
+<div class="content">
+<pre>ASCII docs can be edited using most code editors. We recommend Atom or VSCode.</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="communicate_that_designs_are_ready_to_review">Communicate that designs are ready to review</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Once a design artifact (whether new or updated) has been posted to InVision, let the team know that it is ready for review.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Post to HipChat</p>
+<div class="ulist">
+<ul>
+<li>
+<p>On the Almighty UI/UX channel using @all, the <strong>InVision link</strong>, and a brief message.</p>
+</li>
+<li>
+<p>On the Almighty channel using @here, the <strong>InVision link</strong>, and a brief message.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Post to email lists</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Internal: Post here any sensitive materials to share with the internal group and/or when a design is in progress and you are working with development on specific solution issues:  <a href="mailto:devtools-almighty@redhat.com">devtools-almighty@redhat.com</a></p>
+</li>
+<li>
+<p>External: Post here when you have vetted the design through UXD and are ready for broader/public/community feedback: <a href="mailto:almighty-public@redhat.com">almighty-public@redhat.com</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="communicate_that_designs_are_ready_for_dev">Communicate that designs are ready for dev</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Once the design is complete and it has been reviewed and agreed upon by development and stakeholders, notify development that it’s ready.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>On the pertinent issue in GIT, add the "Ready for Dev" label.</p>
+</li>
+<li>
+<p>On that same issue, add a comment mentioning @joshuawilson and the developer on the feature.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+    </div>
+
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+
+    <aside class="large-3 columns">
+
+        <h5>About</h5>
+
+        <p>Almighty is about providing tools for the planning and
+    execution of an idea to production in a highly distributed team. Part of the Red Hat Developers
+    Group.</p>
+
+        <h5>Blueprints</h5>
+        <ul>
+        
+            <li>
+                <a href="../../blueprints/design_overview.html">Design Overview</a>
+            </li>
+        
+            <li>
+                <a href="../../blueprints/developers_guide.html">Developer&#8217;s Guide</a>
+            </li>
+        
+            <li>
+                <a href="../../blueprints/model_overview.html">Model Overview</a>
+            </li>
+        
+            <li>
+                <a href="../../blueprints/notification.html">Notification</a>
+            </li>
+        
+            <li>
+                <a href="../../blueprints/remote_issue_trackers.html">Remote Issue Trackers</a>
+            </li>
+        
+            <li>
+                <a href="../../blueprints/scheduler.html">Scheduler</a>
+            </li>
+        
+            <li>
+                <a href="../../blueprints/test.html">Test diagram</a>
+            </li>
+        
+        </ul>
+
+        <h6>Actions</h6>
+        <ul>
+            <li>
+                <a href="https://github.com/ALMighty/almighty-devdoc/edit/master/ux/walkthroughs/posting-completed-designs.adoc">Edit</a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- End Sidebar -->
+</div>
+
+<!-- End Main Content and Sidebar -->
+
+<!-- Footer -->
+
+<footer class="row">
+    <div class="large-12 columns">
+        <hr/>
+        <div class="row">
+            <div class="large-12 columns">
+                <p>This is a work in progress.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="../../js/vendor/jquery.js"></script>
+<script src="../../js/vendor/foundation.js"></script>
+<script src="../../js/app.js"></script>
+
+</body>
+</html>
