@@ -17,10 +17,12 @@
     <meta name="author" content="Your name goes here"/>
     <meta name="copyright" content="Maybe consider a Creative Commons license"/>
 
+    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="./css/foundation.css"/>
     <link rel="stylesheet" href="./css/font-awesome.css"/>
     <link rel="stylesheet" href="./css/coderay.css"/>
-    <link rel="stylesheet" href="./css/asciidoctor.css"/>
+    <!-- <link rel="stylesheet" href="./css/asciidoctor.css"/> -->
+    <link rel="stylesheet" href="./css/almighty.css"/>
 
     <style>
         html {
@@ -36,14 +38,19 @@
 <div class="top-bar">
     <div class="top-bar-left">
         <ul class="menu">
-            <li class="menu-text">almighty</li>
+            <li class="menu-text project-title">
+              <a href="./">Almighty</a>
+            </li>
         </ul>
     </div>
     <div class="top-bar-right">
        <ul class="menu">
-           <li><a href="./ux/ux-overview.html">ux designs</a></li>
-           <li><a href="./meetings/agendas.html">meetings</a></li>
-           <li><a href="./">home</a></li>
+           <li>
+             <a href="./meetings/agendas.html">Meetings</a>
+           </li>
+           <li>
+             <a href="./ux/ux-overview.html">UX Designs</a>
+           </li>
        </ul>
     </div>
 </div>
@@ -84,7 +91,7 @@ have done.</p>
 <p>We are currently on hipchat (almighty room), with plans on moving to a publicly hosted mattermost or similar platform soon(tm)!</p>
 </div>
 <div class="paragraph">
-<p>Mailing list - we have a public mailing list <code><a href="mailto:almighty-public@redhat.com">almighty-public@redhat.com</a></code>.  You may subscribe <code><a href="https://www.redhat.com/mailman/listinfo/almighty-public">here</a></code>.</p>
+<p>Mailing list - we have a public mailing list <code><a href="mailto:almighty-public@redhat.com">almighty-public@redhat.com</a></code>.  You may subscribe <a href="https://www.redhat.com/mailman/listinfo/almighty-public">here</a>.</p>
 </div>
 </div>
 </div>
@@ -93,12 +100,11 @@ have done.</p>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
-<col style="width: 16.6666%;">
-<col style="width: 16.6666%;">
-<col style="width: 16.6666%;">
-<col style="width: 16.6666%;">
-<col style="width: 16.6666%;">
-<col style="width: 16.667%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
 </colgroup>
 <thead>
 <tr>
@@ -106,8 +112,7 @@ have done.</p>
 <th class="tableblock halign-left valign-top">Role</th>
 <th class="tableblock halign-left valign-top">Areas</th>
 <th class="tableblock halign-left valign-top">Time</th>
-<th class="tableblock halign-left valign-top">Time zone</th>
-<th class="tableblock halign-left valign-top">Comment</th>
+<th class="tableblock halign-left valign-top">Time Zone</th>
 </tr>
 </thead>
 <tbody>
@@ -117,7 +122,6 @@ have done.</p>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">75%</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CET</p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/qodfathr">Todd A. Mancini</a></p></td>
@@ -125,7 +129,6 @@ have done.</p>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">10%</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">EST</p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/aslakknutsen">Aslak Knutsen</a></p></td>
@@ -133,7 +136,6 @@ have done.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Backend</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">100%</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CET</p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/tsmaeder">Thomas Maeder</a></p></td>
@@ -141,7 +143,6 @@ have done.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Backend</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">100%</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CET</p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/joshuawilson">Joshua Wilson</a></p></td>
@@ -149,7 +150,6 @@ have done.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">UI</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">100%</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">EST</p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/DhritiShikhar">Dhriti Shikhar</a></p></td>
@@ -157,7 +157,6 @@ have done.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Backend</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">100%</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">IST</p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/Mgranfie">Monica Granfield</a></p></td>
@@ -165,7 +164,6 @@ have done.</p>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">100%</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">EST</p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Josephine Qian</p></td>
@@ -173,15 +171,13 @@ have done.</p>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">50%</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">EST</p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sarajane Clark (SJ)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sarajane Clark (Sj)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">User Research + UX</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">20%</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">EST</p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/mindreeper2420">Adam Jolicoeur</a></p></td>
@@ -189,7 +185,6 @@ have done.</p>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">100%</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">EST</p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/gunjansobhani">Gunjan Sobhani</a></p></td>
@@ -197,7 +192,6 @@ have done.</p>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TBD%</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">EST</p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/Ritsyy">Richa Rupela</a></p></td>
@@ -205,7 +199,6 @@ have done.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Backend</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">100%</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">IST</p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/kwk">Konrad Kleine</a></p></td>
@@ -213,7 +206,6 @@ have done.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Backend</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">100%</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CET</p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Ranjith Varakan</p></td>
@@ -221,7 +213,6 @@ have done.</p>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">IST</p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/ldimaggi">Len DiMaggio</a></p></td>
@@ -229,7 +220,6 @@ have done.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">UI/Backend</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">50%</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">EST</p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/sbose78">Shoubhik Bose</a></p></td>
@@ -237,7 +227,6 @@ have done.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Backend</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">100%</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">IST</p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/pranavgore09">Pranav Gore</a></p></td>
@@ -245,7 +234,6 @@ have done.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Backend</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">100%</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">IST</p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/baijum">Baiju Muthukadan</a></p></td>
@@ -253,7 +241,6 @@ have done.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Backend</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">100%</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">IST</p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/nimishamukherjee">Nimisha Mukherjee</a></p></td>
@@ -261,7 +248,6 @@ have done.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">UI</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">100%</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">IST</p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/dustymabe">Dusty Mabe</a></p></td>
@@ -269,15 +255,13 @@ have done.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Containers</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">20%</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">EST</p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/naina-verma">Naina Verma</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">QE</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ALM/Plan</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">50%</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">IST</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IS</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/pradeepto">Pradeepto Bhattacharya</a></p></td>
@@ -285,7 +269,6 @@ have done.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Deploy</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">20%</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">IST</p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/sanbornsen">Sudipta Sen</a></p></td>
@@ -293,7 +276,6 @@ have done.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">UI</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">100%</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">IST</p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
 </table>
@@ -410,7 +392,6 @@ have done.</p>
         </div>
     </div>
 </footer>
-
 
 <script src="./js/vendor/jquery.js"></script>
 <script src="./js/vendor/foundation.js"></script>
