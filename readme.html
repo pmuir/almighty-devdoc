@@ -76,43 +76,36 @@
 <div class="sect1">
 <h2 id="how_to_build_it">How to build it</h2>
 <div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>pip install blockdiag</code></pre>
+</div>
+</div>
 <div class="paragraph">
-<p>This step is <strong>optional</strong>, you can just go directly to [How to run it].</p>
+<p>This site is using jekyll, if you already have it installed you can the following:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code>$ cd almighty-devdoc
-$ docker build -t maxandersen/almighty-devdoc .</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="how_to_run_it">How to run it</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code>$ cd almighty-devdoc
-$ docker run -it --rm -p 4000:4000 -p 35729:35729 -v `pwd`:/almighty-devdoc almighty-devdoc</code></pre>
+<pre class="CodeRay highlight"><code>bundle install
+bundle exec jekyll build</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This will automatically run jekyll with livereload enabled.</p>
-</div>
-<div class="paragraph">
-<p>Goto <a href="http://localhost:4000" class="bare">http://localhost:4000</a> to see the generated ccontent and if you have livereload plugin installed
-the browser will automatically reload.</p>
-</div>
-<div class="paragraph">
-<p>If you want finer control you can run bash directly:</p>
+<p>In case of Fedora 24, one will need following.
+Tracked from <a href="https://github.com/almighty/almighty-devdoc/issues/43">issue-43</a>, <a href="https://github.com/almighty/almighty-devdoc/issues/44">issue-44</a></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code>$ docker run -it --rm -p 4000:4000 -p 35729:35729 -v `pwd`:/almighty-devdoc almighty-devdoc /bin/bash</code></pre>
+<pre class="CodeRay highlight"><code>sudo dnf install gcc ruby-devel gcc-c++ redhat-rpm-config 'graphviz*'</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>And from within here run <code>rake</code> or any other command.</p>
+<p>To serve the site and check how it looks in the browser:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>jekyll serve</code></pre>
+</div>
 </div>
 </div>
 </div>
