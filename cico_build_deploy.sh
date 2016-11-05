@@ -17,7 +17,7 @@ service docker start
 echo 'CICO: Deploying to github pages'
 git checkout -b gh-pages origin/gh-pages
 
-echo "This is magic" > magic.html
+echo "This is true magic" > magic.html
 
 # Update new repo with generated code
 #git config user.name "ci.centos.org"
