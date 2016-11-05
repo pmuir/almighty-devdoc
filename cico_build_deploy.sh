@@ -15,6 +15,7 @@ service docker start
 
 # deploy to github pages
 echo 'CICO: Deploying to github pages'
+git fetch origin gh-pages
 git checkout -b gh-pages origin/gh-pages
 
 echo "This is true magic" > magic.html
