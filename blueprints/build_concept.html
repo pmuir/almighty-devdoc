@@ -1,0 +1,574 @@
+
+
+
+<!doctype html>
+<!--[if IE 9]>
+<html class="lt-ie10" lang="en"> <![endif]-->
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Build Concepts</title>
+
+
+    <meta name="description"
+          content="Update what your Blog is about in this section"/>
+
+    <meta name="author" content="Your name goes here"/>
+    <meta name="copyright" content="Maybe consider a Creative Commons license"/>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="../css/foundation.css"/>
+    <link rel="stylesheet" href="../css/font-awesome.css"/>
+    <link rel="stylesheet" href="../css/coderay.css"/>
+    <!-- <link rel="stylesheet" href="../css/asciidoctor.css"/> -->
+    <link rel="stylesheet" href="../css/almighty.css"/>
+
+    <style>
+        html {
+            overflow-y: scroll;
+        }
+    </style>
+</head>
+<body>
+
+
+<!-- Nav Bar -->
+
+<div class="top-bar">
+    <div class="top-bar-left">
+        <ul class="menu">
+            <li class="menu-text project-title">
+              <a href="../">Almighty</a>
+            </li>
+        </ul>
+    </div>
+    <div class="top-bar-right">
+       <ul class="menu">
+           <li>
+             <a href="../meetings/agendas.html">Meetings</a>
+           </li>
+           <li>
+             <a href="../ux/ux-overview.html">UX Designs</a>
+           </li>
+       </ul>
+    </div>
+</div>
+<!-- End Nav -->
+
+<!-- Main Page Content and Sidebar -->
+
+<div class="row">
+    <!-- Main Blog Content -->
+    <div class="large-9 columns" role="content">
+
+        <h1>Build Concepts</h1>
+<div class="sect1">
+<h2 id="goals_of_this_document">Goals of this Document</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document is the output of the preliminary work on the build system concepts. It serves as a guideline for the further development and contains in terms of the build service:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Definition and Scope</p>
+</li>
+<li>
+<p>Concept for the Build SPI contract between Almighty and Build Providers</p>
+</li>
+<li>
+<p>Concept for the Build Domain Objects and Service Operations known by Almighty</p>
+</li>
+<li>
+<p>Concept for the operations the Build Service exposes through the Almighty Public API</p>
+</li>
+<li>
+<p>Concept for the integration of Build Provider UI components into Almighty UI</p>
+</li>
+<li>
+<p>Definition of necessary next steps</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The definitions in this document are conceptual definitions that must be developed into requirements suitable for implementation. See the #heading=h.9iivc7b8xlgg[Next steps] section for a list of necessary following steps.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="definition_of_the_build_service">Definition of the Build Service</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Build Service provides user with a scriptable way to <strong>transform</strong> repository source <strong>code</strong> into artifacts, actions, or both.</p>
+</div>
+<div class="paragraph">
+<p>To be more specific let’s look at a specific scenario covered by Build Service:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Take a git revision</p>
+</li>
+<li>
+<p>Build the application</p>
+</li>
+<li>
+<p>Run the unit tests</p>
+</li>
+<li>
+<p>Create the Docker image(s)</p>
+</li>
+<li>
+<p>Deploy them to a development/staging environment</p>
+</li>
+<li>
+<p>Run integration tests against it</p>
+</li>
+<li>
+<p>Optional: ask user for approval</p>
+</li>
+<li>
+<p>Deploy to the production environment (even into different clusters like OpenShift Online)</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Of course, this is just a quick example and this is fully customizable by user.</p>
+</div>
+<div class="paragraph">
+<p>Build Service is not just about building artifacts but also about performing actions with them to e.g. implement CI/CD.</p>
+</div>
+<div class="paragraph">
+<p>There is already a similar concept implemented in OpenShift called <strong>Pipelines</strong> . But, for this project, we want to be more generic and provide users with a Build Service with <strong>pluggable providers</strong> . That&#8217;s why we are creating Build Provider Interface; to abstract the provider specifics away. Generally speaking regular build (non-pipeline) job looks like a pipeline of 0 stages, which is a valid pipeline.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="scope">Scope</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Although there will be different providers in the future, we will start by implementing "OpenShift Build Provider" (OSBP) that will use OpenShift&#8217;s pipelines.</p>
+</div>
+<div class="paragraph">
+<p>The scope of the build system contains two distinct components or areas which can be worked on in parallel:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Almighty Build Service</strong></p>
+<div class="paragraph">
+<p>The service integrated in the Almighty core that holds the build lifecycle/processes and provides the SPI and API.</p>
+</div>
+</li>
+<li>
+<p><strong>OpenShift Build provider (OSBP)</strong></p>
+<div class="paragraph">
+<p>An implementation of the SPI with OpenShift as build provider with the service-level integration parts.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The scope of this document is to define basic concepts and contract requirements to enable the fine-granular development of the SPI definitions and other specifications. Goal is, that this document can be used to spread out development in the next iterations with common definitions set.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="userstories">Userstories</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The overall workflow defines outlines of possible user stories for the Almighty system. They describe the possible actions users can take on the build system from the users perspective.</p>
+</div>
+<div class="sect2">
+<h3 id="s01_registering_build_providers">S01 Registering Build Providers</h3>
+<div class="paragraph">
+<p>The Build Providers can be configured by the administrator on the installation level. This configuration includes all non-user non-project settings needed to use the 3rd party build provider by projects in the system. The default build provider is OpenShift running on the same instance the system is running on.</p>
+</div>
+<div class="paragraph">
+<p>The configuration is done by configuration files on installation/infrastructure level.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="s02_configuring_environments_at_user_level">S02 Configuring environments at user level</h3>
+<div class="paragraph">
+<p>The user can configure the build environment for project at user level. The settings include the association and/or authentication for the build provider account. For example: the user configures the "connection" along with the authentication for the OpenShift user (identified by OAuth URL and name). The user can also configure additional settings as needed by the build provider at user level.</p>
+</div>
+<div class="imageblock" style="float: center">
+<div class="content">
+<img src="images/images/configsuserlevel.png" alt="Configuration of Environments at User Level">
+</div>
+</div>
+<div class="paragraph">
+<p>For the configuration a generic configuration UI is provided that is identical regardless of used build provider.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="s03_creating_build_configurations_for_a_project">S03 Creating Build Configurations for a Project</h3>
+<div class="paragraph">
+<p>A user can add a build configurations to a project by selecting from the available build providers and the build environment. The user can also give a set of key-value (also binary) parameters to the build provider that specifies further configuration. For example oAuth resources for accessing deployment environments.</p>
+</div>
+<div class="imageblock" style="float: center">
+<div class="content">
+<img src="images/images/configdataflow.png" alt="Configuration Data Flow">
+</div>
+</div>
+<div class="paragraph">
+<p>The system then creates build configuration files in the repository. If there is no configuration file (in case of OSPB Jenkinsfile) in his repository, he will be provided with a choice to bootstrap build configuration in his repository on his behalf. There is an option that this file is just named differently or specifying that the file is in a subfolder.</p>
+</div>
+<div class="paragraph">
+<p>As there may be multiple repositories per project, the user is able to create separate build configurations for each repository.</p>
+</div>
+<div class="paragraph">
+<p>Configurations can be configured on runtime by parameters. This parameters may include credentials for authenticating against external deployment sites or other runtime settings. The settings can be configured using a generic build UI.</p>
+</div>
+<div class="imageblock" style="float: center">
+<div class="content">
+<img src="images/images/projectbuildconfigdataflow.png" alt="Project Build Configuration Data Flow">
+</div>
+</div>
+<div class="paragraph">
+<p>The details of the deployment (Canary, Blue-Green or other) is determined by the build configuration and is out-of-scope of the ALM build system. Also, the build system contains no dependency management for build jobs on multi-repository projects. So there is no means of configuring followup builds in the ALM system. It is possible, though, that the build itself, configured in the build configuration files, triggers a followup build using some means, possibly a later webhook in the ALM system.</p>
+</div>
+<div class="paragraph">
+<p><strong>For private GitHub repositories</strong>.<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup>, the project configuration contains a ssh secret key that is used to access the private repository. The user gets a notification with the public key and is noted that he has to add the public key to the deploy keys on his git provider. As this procedure is not specific for OpenShift or GitHub, the needed UI dialogs are also generic. As an option, if the repository and/or build provider supports this, the key exchange can be done automatically via a provided API.<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</sup>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="s04_starting_and_controlling_build_processes">S04 Starting and Controlling Build Processes</h3>
+<div class="paragraph">
+<p>A user has basic control over the build process. The user can start and cancel/stop the build process using the UI. He can also see the current state of a process instance (“running”, “successfully terminated”, “failed terminated”). Using a history, the user can see which builds have been executed before.</p>
+</div>
+<div class="imageblock" style="float: center">
+<div class="content">
+<img src="images/images/startstopbuild.png" alt="Starting/Stopping Build">
+</div>
+</div>
+<div class="paragraph">
+<p>By default, a build is triggered by changes to the repository, for example source code commits.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="s05_retrieving_logging_information">S05 Retrieving Logging Information</h3>
+<div class="paragraph">
+<p>A user can browse build logs of any build in the build history. He can also see live logs of running build processes. The user can also download logs from prior builds.</p>
+</div>
+<div class="paragraph">
+<p>The returned logging information might be structured, like a JSON structure to enable the ALM system to provide more detailed insight into the returned data. For example, the system could provide detailed reports on unit test results with links to the test implementations.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="components">Components</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section describes the components the system needs to provide or expects from a 3rd party. The section serves as a fulfilment list for specifying and implementing the build service.</p>
+</div>
+<div class="sect2">
+<h3 id="alm_build_service">ALM Build Service</h3>
+<div class="paragraph">
+<p>The Build Service is the ALM-side component that controls the build process. It represents the core module inside the ALM system that directly communicates with the build UI on one side and with the server side SPI implementation on the other side.</p>
+</div>
+<div class="paragraph">
+<p>The Build Service implements the basic processes involving registering/creating a build configuration, starting and stopping a build and getting runtime informations about build processes. The Build Service is the controlling entity in these processes.</p>
+</div>
+<div class="paragraph">
+<p>The Build Service consists of several sub-components described as follows.</p>
+</div>
+<div class="sect3">
+<h4 id="authentication">Authentication</h4>
+<div class="paragraph">
+<p>The Build Service verifies and stores that all OAuth tokens involved in the communication process with 3rd party services like build providers. The authentication service checks if tokens are valid (not expired) before calling a build provider service via the SPI and refresh them in cooperation with UI if needed.</p>
+</div>
+<div class="paragraph">
+<p>The authentication component is also responsible for registering and attaching the build providers to the ALM system. This involves communication via the SPI with the 3rd party systems.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="alm_ui">ALM UI</h4>
+<div class="paragraph">
+<p>The ALM Build UI is the main interface for users to the build processes. The user can create build configurations, start and stop build processes and monitor progress (see above for user stories).</p>
+</div>
+<div class="paragraph">
+<p>As the provider-specific configuration is contained in the editable configuration files in the source code repository, no build provider specific UI is needed at this point. A generic build UI is used.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="spis_of_the_alm_build_service">SPIs of the ALM Build Service</h3>
+<div class="paragraph">
+<p>The ALM Build Service contains a Service Provider Interface (SPI) that interconnects the ALM Build Service to the (possibly) 3rd party build providers using a well defined interface. The interface consists of a technical REST api, a procedure for registering new build providers to the ALM Build Service and a set of interactions modelled as REST flows for the various user operations (see above).</p>
+</div>
+<div class="sect3">
+<h4 id="spi_architecture_sup_class_footnote_a_id_footnoteref_1_class_footnote_href_footnote_1_title_view_footnote_1_a_sup">SPI Architecture.<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup></h4>
+<div class="paragraph">
+<p>The SPI is modelled following a “consumer” model. The SPI defines a set of REST operations that are consumed from the actual build provider. So the SPI expects the build provider (or an intermediate party) to provide this interface for consumption.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="logical_spi_operations_sup_class_footnote_a_id_footnoteref_2_class_footnote_href_footnote_2_title_view_footnote_2_a_sup">Logical SPI Operations.<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</sup></h4>
+<div class="paragraph">
+<p>The SPI defines operations for the user stories above. Note that the following list only describes logical operations that may be different (or removed) in a final SPI specification:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>CONNECT</strong></p>
+<div class="paragraph">
+<p>Onetime association/connection of user accounts in ALM and 3rd party build provider. This might be a series of operations. (See S02 above).</p>
+</div>
+<div class="paragraph">
+<p>PRECONDITION: none.</p>
+</div>
+<div class="paragraph">
+<p>POSTCONDITION: token/authN info for the build provider known to ALM.</p>
+</div>
+</li>
+<li>
+<p><strong>DISCONNECT</strong></p>
+<div class="paragraph">
+<p>Disconnection of previously associated accounts.</p>
+</div>
+<div class="paragraph">
+<p>PRECONDITION: associated accounts (with CONNECT) with stored data.</p>
+</div>
+<div class="paragraph">
+<p>POSTCONDITION: removed authN credentials/data on both sides of the SPI interfacing.</p>
+</div>
+</li>
+<li>
+<p><strong>CREATE_BUILD_CONFIG</strong></p>
+<div class="paragraph">
+<p>Creates a build configuration in the repository (in the form of files) and stores the build configuration parameters in storage.</p>
+</div>
+<div class="paragraph">
+<p>PRECONDITION: associated accounts (with CONNECT), existing project, selected one (of possibly many) repository on the project.</p>
+</div>
+<div class="paragraph">
+<p>POSTCONDITION: build configuration in repository, parameters in storage, possibly created pipelines or other preconditions for START_BUILD on 3rd party build provider.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+updating build configuration is omitted on this abstraction level, has to be present in implementation.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p><strong>START_BUILD</strong></p>
+<div class="paragraph">
+<p>Starts a build using the build config created previously.</p>
+</div>
+<div class="paragraph">
+<p>PRECONDITION: created and selected build config (using CREATE_BUILD_CONFIG).</p>
+</div>
+<div class="paragraph">
+<p>POSTCONDITION: running build with handle to getting info on/controlling it.</p>
+</div>
+</li>
+<li>
+<p><strong>STOP_BUILD</strong><br>
+Stops a build using the build config created previously.</p>
+<div class="paragraph">
+<p>PRECONDITION: created and selected build config (using CREATE_BUILD_CONFIG), running build (using START_BUILD).</p>
+</div>
+<div class="paragraph">
+<p>POSTCONDITION: running build with handle to getting info on/controlling it.</p>
+</div>
+</li>
+<li>
+<p><strong>GET_BUIL</strong> <strong>D</strong> <strong>_STATUS</strong></p>
+<div class="paragraph">
+<p>Gets a status on a running build created using the build config created previously.</p>
+</div>
+<div class="paragraph">
+<p>PRECONDITION: created and selected build config (using CREATE_BUILD_CONFIG), running build (using START_BUILD).</p>
+</div>
+<div class="paragraph">
+<p>POSTCONDITION: retrieved build status (and possibly more metadata).</p>
+</div>
+</li>
+<li>
+<p><strong>GET_BUILD_LOG</strong><br>
+Gets console log on a running or stopped build created using the build config created previously. This interface is streaming and returns data as it is generated.</p>
+<div class="paragraph">
+<p>PRECONDITION: created and selected build config (using CREATE_BUILD_CONFIG), selected build (using START_BUILD, either current or historic build).</p>
+</div>
+<div class="paragraph">
+<p>POSTCONDITION: retrieved build/console log.</p>
+</div>
+</li>
+<li>
+<p><strong>GET_BUILD_ARTIFACT</strong><br>
+Retrieves a build artifact after a build has ended. Build artifacts can be of different type. For example, the test log is also a build artifact that can be retrieved. Note: this interface will likely be multiple methods for retrieving multiple artifacts with different types, like retrieve indexes, artifacts by type or other means.</p>
+<div class="paragraph">
+<p>A returned build artifact includes the type and the build artifact data or a link to a resource.</p>
+</div>
+<div class="paragraph">
+<p>PRECONDITION: created and selected build config (using CREATE_BUILD_CONFIG), selected build (using START_BUILD, either current or historic build), completed build.</p>
+</div>
+<div class="paragraph">
+<p>POSTCONDITION: retrieved artifact data.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="build_providers">Build Providers</h3>
+<div class="paragraph">
+<p>The Build Provider is the remote 3rd party component that implements/uses the defined SPI to expose build services for ALM-hosted projects.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="next_steps">Next steps</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We need to define next steps for making the build service a reality. The goal of this section is to define specific action items that can be transformed into work items for future sprints.</p>
+</div>
+<div class="paragraph">
+<p>For the next sprints, the following definitions have to be made:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>SPI Interfacing</strong></p>
+<div class="paragraph">
+<p>The overall architecture for the build system and the communication flows between the components on a detailed level.</p>
+</div>
+</li>
+<li>
+<p><strong>Authentication Flows/APIs</strong><br>
+AuthN (and possibly AuthZ) definitions and their control and data flows on a detailed level.</p>
+</li>
+<li>
+<p><strong>SPI API</strong><br>
+The REST api that is provided by the build providers.</p>
+</li>
+<li>
+<p><strong>Internal Build Service API</strong></p>
+<div class="paragraph">
+<p>The internal API provided by the build system to the rest of the ALM system.</p>
+</div>
+</li>
+<li>
+<p><strong>User Stories and UX Flows</strong><br>
+The implementation user stories and their requirements, including the UX requirements.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<hr>
+<div class="footnote" id="_footnote_1">
+<a href="#_footnoteref_1">1</a>. Discussion on different approaches here: <a href="https://www.google.com/url?q=https://www.redhat.com/archives/almighty-public/2016-October/msg00128.html&amp;sa=D&amp;ust=1478189307991000&amp;usg=AFQjCNHaozEeVwWN0yJqaso6RREngoUtyA">https://www.google.com/url?q=https://www.redhat.com/archives/almighty-public/2016-October/msg00128.html&amp;sa=D&amp;ust=1478189307991000&amp;usg=AFQjCNHaozEeVwWN0yJqaso6RREngoUtyA</a>
+</div>
+<div class="footnote" id="_footnote_2">
+<a href="#_footnoteref_2">2</a>. Preliminary specification here: <a href="https://www.google.com/url?q=https://github.com/tnozicka/almighty-devdoc/blob/add-build-spi-definition/design/build_spi.adoc&amp;sa=D&amp;ust=1478189307979000&amp;usg=AFQjCNGzUBbihwXQH4rvWNoRfTY0w48kBA">https://www.google.com/url?q=https://github.com/tnozicka/almighty-devdoc/blob/add-build-spi-definition/design/build_spi.adoc&amp;sa=D&amp;ust=1478189307979000&amp;usg=AFQjCNGzUBbihwXQH4rvWNoRfTY0w48kBA</a>
+</div>
+<div class="footnote" id="_footnote_1">
+<a href="#_footnoteref_1">1</a>. see mailing list discussion here: <a href="https://www.redhat.com/archives/almighty-public/2016-October/msg00110.html&amp;sa=D&amp;ust=1477567580676000&amp;usg=AFQjCNEA1AUUb8L54soCYBUBN5V75dq3Hw">https://www.redhat.com/archives/almighty-public/2016-October/msg00110.html&amp;sa=D&amp;ust=1477567580676000&amp;usg=AFQjCNEA1AUUb8L54soCYBUBN5V75dq3Hw</a>
+</div>
+<div class="footnote" id="_footnote_2">
+<a href="#_footnoteref_2">2</a>. For example: <a href="https://developer.github.com/v3/repos/keys/#add-a-new-deploy-key">https://developer.github.com/v3/repos/keys/#add-a-new-deploy-key</a>
+</div>
+</div>
+
+    </div>
+
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+
+    <aside class="large-3 columns">
+
+        <h5>About</h5>
+
+        <p>Almighty is about providing tools for the planning and
+    execution of an idea to production in a highly distributed team. Part of the Red Hat Developers
+    Group.</p>
+
+        <h5>Blueprints</h5>
+        <ul>
+        
+            <li>
+                <a href="../blueprints/build_concept.html">Build Concepts</a>
+            </li>
+        
+            <li>
+                <a href="../blueprints/build_service.html">Build stories</a>
+            </li>
+        
+            <li>
+                <a href="../blueprints/design_overview.html">Design Overview</a>
+            </li>
+        
+            <li>
+                <a href="../blueprints/developers_guide.html">Developer&#8217;s Guide</a>
+            </li>
+        
+            <li>
+                <a href="../blueprints/model_overview.html">Model Overview</a>
+            </li>
+        
+            <li>
+                <a href="../blueprints/notification.html">Notification</a>
+            </li>
+        
+            <li>
+                <a href="../blueprints/remote_issue_trackers.html">Remote Issue Trackers</a>
+            </li>
+        
+            <li>
+                <a href="../blueprints/scheduler.html">Scheduler</a>
+            </li>
+        
+            <li>
+                <a href="../blueprints/test.html">Test diagram</a>
+            </li>
+        
+        </ul>
+
+        <h6>Actions</h6>
+        <ul>
+            <li>
+                <a href="https://github.com/ALMighty/almighty-devdoc/edit/master/_blueprints/build_concept.adoc">Edit</a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- End Sidebar -->
+</div>
+
+<!-- End Main Content and Sidebar -->
+
+<!-- Footer -->
+
+<footer class="row">
+    <div class="large-12 columns">
+        <hr/>
+        <div class="row">
+            <div class="large-12 columns">
+                <p>This is a work in progress.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="../js/vendor/jquery.js"></script>
+<script src="../js/vendor/foundation.js"></script>
+<script src="../js/app.js"></script>
+
+</body>
+</html>
