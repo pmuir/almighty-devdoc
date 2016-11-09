@@ -18,7 +18,7 @@ echo 'CICO: Deploying to github pages'
 git fetch origin gh-pages
 git checkout -b gh-pages origin/gh-pages
 
-echo "This is true real funky awesome amazing wonka slashy full clone no-jenkins-env magic" > magictoo.html
+echo "This is true real funky awesome amazing wonka slashy full clone no-jenkins-env last test magic" > magictoo.html
 
 # Update new repo with generated code
 #git config user.name "ci.centos.org"
